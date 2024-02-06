@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from pychess.colors import Colors
 from pychess.coordinates import Coordinates
-from pychess.piece import King, Piece, Queen, Rooks, Bishop, Knight
+from pychess.piece import King, Piece, Queen, Rooks, Bishop, Knight, Pawn
 
 
 @dataclass
@@ -113,17 +113,30 @@ class TestKnight:
 
 
 class TestPawn:
-    pawn = Knight(Colors.WHITE)
+    pawn_white = Pawn(Colors.WHITE)
+    pawn_black = Pawn(Colors.BLACK)
 
     def test_can_move_with_success_return_bool(self):
-        pawn_can_move = [
+        pawn_white_can_move = [
             Move(Coordinates(4, 4), Coordinates(4, 5)),
-            Move(Coordinates(4, 4), Coordinates(3, 5)),
         ]
-        assert_can_move(pawn_can_move, True, self.pawn)
+        pawn_black_can_move = [
+            Move(Coordinates(4, 4), Coordinates(4, 3)),
+        ]
+        assert_can_move(pawn_white_can_move, True, self.pawn_white)
+        assert_can_move(pawn_black_can_move, True, self.pawn_black)
 
-        pawn_cant_move = [
-            Move(Coordinates(4, 4), Coordinates(5, 10)),
+        pawn_white_cant_move = [
+            Move(Coordinates(4, 4), Coordinates(4, 8)),
+            Move(Coordinates(4, 4), Coordinates(5, 5)),
             Move(Coordinates(4, 4), Coordinates(4, 4)),
+            Move(Coordinates(4, 4), Coordinates(4, 3)),
         ]
-        assert_can_move(pawn_cant_move, False, self.pawn)
+        pawn_black_cant_move = [
+            Move(Coordinates(4, 4), Coordinates(4, 1)),
+            Move(Coordinates(4, 4), Coordinates(5, 5)),
+            Move(Coordinates(4, 4), Coordinates(4, 4)),
+            Move(Coordinates(4, 4), Coordinates(4, 5)),
+        ]
+        assert_can_move(pawn_white_cant_move, False, self.pawn_white)
+        assert_can_move(pawn_black_cant_move, False, self.pawn_black)
