@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from pychess.colors import Colors
 from pychess.coordinates import Coordinates
-from pychess.piece import King, Piece, Queen, Rooks, Bishop, Knight, Pawn
+from pychess.piece import Bishop, King, Knight, Pawn, Piece, Queen, Rooks
 
 
 @dataclass
